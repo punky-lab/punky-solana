@@ -3,14 +3,14 @@ import { Program } from "@coral-xyz/anchor";
 import { PublicKey } from "@solana/web3.js";
 import { Punkystatus } from "../target/types/punkystatus";
 import { RunnerGameReward } from "../target/types/runner_game_reward";
-import { RunnerGameTime } from '../target/types/runner_game_time';
+import { RunnerGameTime } from "../target/types/runner_game_time";
 import {
-    InitializeNewWorld,
-    AddEntity,
-    InitializeComponent,
-    ApplySystem,
-} from "@magicblock-labs/bolt-sdk"
-import {expect} from "chai";
+  InitializeNewWorld,
+  AddEntity,
+  InitializeComponent,
+  ApplySystem,
+} from "@magicblock-labs/bolt-sdk";
+import { expect } from "chai";
 
 describe("PunkySolana", () => {
   // Configure the client to use the local cluster.
@@ -23,8 +23,10 @@ describe("PunkySolana", () => {
   let componentPda: PublicKey;
 
   const punkyStatus = anchor.workspace.punkystatus as Program<Punkystatus>;
-  const runnerGameReward = anchor.workspace.RunnerGameReward as Program<RunnerGameReward>;
-  const runnerGameTime = anchor.workspace.RunnerGameTime as Program<RunnerGameTime>;
+  const runnerGameReward = anchor.workspace
+    .RunnerGameReward as Program<RunnerGameReward>;
+  const runnerGameTime = anchor.workspace
+    .RunnerGameTime as Program<RunnerGameTime>;
 
   it("InitializeNewWorld", async () => {
     const initNewWorld = await InitializeNewWorld({
@@ -33,7 +35,9 @@ describe("PunkySolana", () => {
     });
     const txSign = await provider.sendAndConfirm(initNewWorld.transaction);
     worldPda = initNewWorld.worldPda;
-    console.log(`Initialized a new world (ID=${worldPda}). Initialization signature: ${txSign}`);
+    console.log(
+      `Initialized a new world (ID=${worldPda}). Initialization signature: ${txSign}`
+    );
   });
 
   it("Add an entity", async () => {
@@ -44,7 +48,9 @@ describe("PunkySolana", () => {
     });
     const txSign = await provider.sendAndConfirm(addEntity.transaction);
     entityPda = addEntity.entityPda;
-    console.log(`Initialized a new Entity (ID=${addEntity.entityPda}). Initialization signature: ${txSign}`);
+    console.log(
+      `Initialized a new Entity (ID=${addEntity.entityPda}). Initialization signature: ${txSign}`
+    );
   });
 
   it("Add Punky status component", async () => {
@@ -53,9 +59,13 @@ describe("PunkySolana", () => {
       entity: entityPda,
       componentId: punkyStatus.programId,
     });
-    const txSign = await provider.sendAndConfirm(initializeComponent.transaction);
+    const txSign = await provider.sendAndConfirm(
+      initializeComponent.transaction
+    );
     componentPda = initializeComponent.componentPda;
-    console.log(`Initialized the grid component. Initialization signature: ${txSign}`);
+    console.log(
+      `Initialized the grid component. Initialization signature: ${txSign}`
+    );
   });
 
   it("Apply game reward system", async () => {
@@ -69,10 +79,12 @@ describe("PunkySolana", () => {
     const applySystem = await ApplySystem({
       authority: provider.wallet.publicKey,
       systemId: runnerGameReward.programId,
-      entities: [{
-        entity: entityPda,
-        components: [{ componentId: punkyStatus.programId }],
-      }],
+      entities: [
+        {
+          entity: entityPda,
+          components: [{ componentId: punkyStatus.programId }],
+        },
+      ],
       world: worldPda,
     });
     const txSign = await provider.sendAndConfirm(applySystem.transaction);
@@ -96,10 +108,12 @@ describe("PunkySolana", () => {
     const applySystem = await ApplySystem({
       authority: provider.wallet.publicKey,
       systemId: runnerGameTime.programId,
-      entities: [{
-        entity: entityPda,
-        components: [{ componentId: punkyStatus.programId }],
-      }],
+      entities: [
+        {
+          entity: entityPda,
+          components: [{ componentId: punkyStatus.programId }],
+        },
+      ],
       world: worldPda,
     });
     const txSign = await provider.sendAndConfirm(applySystem.transaction);
@@ -111,5 +125,4 @@ describe("PunkySolana", () => {
     );
     expect(positionAfter.y.toNumber()).to.lt(0);
   });
-
 });

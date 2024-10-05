@@ -8,8 +8,8 @@ pub mod runner_game_time {
 
     pub fn execute(ctx: Context<Components>, _args_p: Vec<u8>) -> Result<Components> {
         let position = &mut ctx.accounts.position;
-        position.x += 1;
-        position.y -= 1;
+        position.loyalty += 1;
+        position.fitness -= 1;
         Ok(ctx.accounts)
     }
 
