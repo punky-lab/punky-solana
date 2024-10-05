@@ -1,8 +1,8 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
 import { PublicKey } from "@solana/web3.js";
-import { Position } from "../target/types/position";
-import { Movement } from "../target/types/movement";
+import { Punkystatus } from "../target/types/punkystatus";
+import { RunnerGameReward } from "../target/types/runner_game_reward";
 import {
     InitializeNewWorld,
     AddEntity,
@@ -21,8 +21,8 @@ describe("PunkySolana", () => {
   let entityPda: PublicKey;
   let componentPda: PublicKey;
 
-  const positionComponent = anchor.workspace.Position as Program<Position>;
-  const systemMovement = anchor.workspace.Movement as Program<Movement>;
+  const punkyStatus = anchor.workspace.punkystatus as Program<Punkystatus>;
+  const runnerGameReward = anchor.workspace.RunnerGameReward as Program<RunnerGameReward>;
 
   it("InitializeNewWorld", async () => {
     const initNewWorld = await InitializeNewWorld({
@@ -49,7 +49,7 @@ describe("PunkySolana", () => {
     const initializeComponent = await InitializeComponent({
       payer: provider.wallet.publicKey,
       entity: entityPda,
-      componentId: positionComponent.programId,
+      componentId: punkyStatus.programId,
     });
     const txSign = await provider.sendAndConfirm(initializeComponent.transaction);
     componentPda = initializeComponent.componentPda;
@@ -58,7 +58,7 @@ describe("PunkySolana", () => {
 
   it("Apply a system", async () => {
     // Check that the component has been initialized and x is 0
-    const positionBefore = await positionComponent.account.position.fetch(
+    const positionBefore = await punkyStatus.account.punkyStatus.fetch(
       componentPda
     );
     expect(positionBefore.x.toNumber()).to.equal(0);
@@ -66,10 +66,10 @@ describe("PunkySolana", () => {
     // Run the movement system
     const applySystem = await ApplySystem({
       authority: provider.wallet.publicKey,
-      systemId: systemMovement.programId,
+      systemId: runnerGameReward.programId,
       entities: [{
         entity: entityPda,
-        components: [{ componentId: positionComponent.programId }],
+        components: [{ componentId: punkyStatus.programId }],
       }],
       world: worldPda,
     });
@@ -77,7 +77,7 @@ describe("PunkySolana", () => {
     console.log(`Applied a system. Signature: ${txSign}`);
 
     // Check that the system has been applied and x is > 0
-    const positionAfter = await positionComponent.account.position.fetch(
+    const positionAfter = await punkyStatus.account.punkyStatus.fetch(
       componentPda
     );
     expect(positionAfter.x.toNumber()).to.gt(0);

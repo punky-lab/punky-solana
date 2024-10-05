@@ -5,9 +5,9 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-movement = "EYjR953gCuZPEGkjEXMwLS1ZcJK8XzvQbnjoQQrzVryz"
-position = "3CFTHHqDdQaWNZ8pQ8X5GWmRXuyJWfP1yq94EmAAWqSk"
-punky_solana = "BkwuLEBLKo7pBMTjQ3HJSf74x9QFRGWArJawafjTXXuf"
+punky-status = "CZuB5tTqJgu8ngWUSBtn5vFFSBin4VXbB8Yk56HUwtNc"
+punky_solana = "ACvLXX4zcamroMhhxusoTEeYKTqtTqNvpMpboCJfyrvS"
+runner-game-reward = "BMGw6MuBpr4E9Hk1SNNH2DbsQ2acA9yhPKWKkjT5y8Hj"
 
 [registry]
 url = "https://api.apr.dev"

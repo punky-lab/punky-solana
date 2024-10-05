@@ -1,10 +1,10 @@
 use bolt_lang::*;
-use position::Position;
+use punky_status::PunkyStatus;
 
-declare_id!("EYjR953gCuZPEGkjEXMwLS1ZcJK8XzvQbnjoQQrzVryz");
+declare_id!("BMGw6MuBpr4E9Hk1SNNH2DbsQ2acA9yhPKWKkjT5y8Hj");
 
 #[system]
-pub mod movement {
+pub mod runner_game_reward {
 
     pub fn execute(ctx: Context<Components>, _args_p: Vec<u8>) -> Result<Components> {
         let position = &mut ctx.accounts.position;
@@ -15,7 +15,7 @@ pub mod movement {
 
     #[system_input]
     pub struct Components {
-        pub position: Position,
+        pub position: PunkyStatus,
     }
 
 }

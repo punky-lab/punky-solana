@@ -1,10 +1,10 @@
 use bolt_lang::*;
 
-declare_id!("3CFTHHqDdQaWNZ8pQ8X5GWmRXuyJWfP1yq94EmAAWqSk");
+declare_id!("CZuB5tTqJgu8ngWUSBtn5vFFSBin4VXbB8Yk56HUwtNc");
 
 #[component]
 #[derive(Default)]
-pub struct Position {
+pub struct PunkyStatus {
     pub x: i64,
     pub y: i64,
     pub z: i64,

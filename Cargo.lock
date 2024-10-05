@@ -1267,16 +1267,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "movement"
-version = "0.1.8"
-dependencies = [
- "anchor-lang",
- "bolt-lang",
- "position",
- "serde",
-]
-
-[[package]]
 name = "num-bigint"
 version = "0.4.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1375,14 +1365,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cc9c68a3f6da06753e9335d63e27f6b9754dd1920d941135b7ea8224f141adb2"
 
 [[package]]
-name = "position"
-version = "0.1.8"
-dependencies = [
- "anchor-lang",
- "bolt-lang",
-]
-
-[[package]]
 name = "ppv-lite86"
 version = "0.2.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1443,6 +1425,14 @@ dependencies = [
 
 [[package]]
 name = "punky-solana"
+version = "0.1.8"
+dependencies = [
+ "anchor-lang",
+ "bolt-lang",
+]
+
+[[package]]
+name = "punky-status"
 version = "0.1.8"
 dependencies = [
  "anchor-lang",
@@ -1595,6 +1585,16 @@ name = "regex-syntax"
 version = "0.8.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2b15c43186be67a4fd63bee50d0303afffcef381492ebe2c5d87f324e1b8815c"
+
+[[package]]
+name = "runner-game-reward"
+version = "0.1.8"
+dependencies = [
+ "anchor-lang",
+ "bolt-lang",
+ "punky-status",
+ "serde",
+]
 
 [[package]]
 name = "rustc-hash"
