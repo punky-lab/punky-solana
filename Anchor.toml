@@ -8,6 +8,7 @@ skip-lint = false
 punky-status = "CZuB5tTqJgu8ngWUSBtn5vFFSBin4VXbB8Yk56HUwtNc"
 punky_solana = "ACvLXX4zcamroMhhxusoTEeYKTqtTqNvpMpboCJfyrvS"
 runner-game-reward = "BMGw6MuBpr4E9Hk1SNNH2DbsQ2acA9yhPKWKkjT5y8Hj"
+runner-game-time = "8FNce2R1v5WxUzsCWKxrFHnAsQ8xhL8rn6wi9wgTcZ6y"
 
 [registry]
 url = "https://api.apr.dev"

@@ -1,14 +1,15 @@
 use bolt_lang::*;
 use punky_status::PunkyStatus;
 
-declare_id!("BMGw6MuBpr4E9Hk1SNNH2DbsQ2acA9yhPKWKkjT5y8Hj");
+declare_id!("8FNce2R1v5WxUzsCWKxrFHnAsQ8xhL8rn6wi9wgTcZ6y");
 
 #[system]
-pub mod runner_game_reward {
+pub mod runner_game_time {
 
     pub fn execute(ctx: Context<Components>, _args_p: Vec<u8>) -> Result<Components> {
         let position = &mut ctx.accounts.position;
         position.x += 1;
+        position.y -= 1;
         Ok(ctx.accounts)
     }
 

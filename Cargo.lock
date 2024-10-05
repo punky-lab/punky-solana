@@ -1597,6 +1597,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "runner-game-time"
+version = "0.1.8"
+dependencies = [
+ "anchor-lang",
+ "bolt-lang",
+ "punky-status",
+ "serde",
+]
+
+[[package]]
 name = "rustc-hash"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
