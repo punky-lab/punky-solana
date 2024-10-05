@@ -1,6 +1,4 @@
-
 .anchor
-.bolt
 .DS_Store
 target
 **/*.rs.bk
