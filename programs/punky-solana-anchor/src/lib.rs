@@ -1,8 +1,10 @@
 mod config;
+mod errors;
 mod punky;
 
 use anchor_lang::prelude::*;
 use config::*;
+use errors::*;
 use punky::*;
 
 declare_id!("H1LbKLGSBTKUrWiPTU6QiPzodkQaAWEqvMXjhiXu3izU");
@@ -41,11 +43,12 @@ pub mod punky_solana_anchor {
     pub fn run_one_second(ctx: Context<RunOneSecond>) -> Result<()> {
         let punky_account = &mut ctx.accounts.punky_account;
 
-        if punky_account.fitness - FITNESS_REDUCE_ON_RUN_ONE_SECOND < 0 {
-            msg!("not enough fitness");
-        } else {
-            punky_account.fitness -= FITNESS_REDUCE_ON_RUN_ONE_SECOND;
-        }
+        require!(
+            punky_account.fitness - FITNESS_REDUCE_ON_RUN_ONE_SECOND >= 0,
+            PunkyGameError::NotEnoughFitness,
+        );
+
+        punky_account.fitness -= FITNESS_REDUCE_ON_RUN_ONE_SECOND;
 
         if punky_account.loyalty + LOYALTY_ADD_ON_RUN_ONE_SECOND > MAX_LOYALTY {
             msg!("loyalty exceeded limit");
@@ -84,7 +87,7 @@ pub struct Initialize<'info> {
         seeds = [b"punky", signer.key().as_ref()],
         bump,
         payer = signer,
-        space = 32 * 4 + 64 * 2 + 1,
+        space = 4 * 4 + 8 * 2 + 16,
     )]
     pub new_punky_account: Account<'info, PunkyAccount>,
     #[account(mut)]
