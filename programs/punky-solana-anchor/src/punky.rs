@@ -2,6 +2,7 @@ use anchor_lang::prelude::*;
 
 #[account]
 pub struct PunkyAccount {
+    // pub authority: Pubkey,
     pub health: i32,
     pub fitness: i32,
     pub loyalty: i32,
